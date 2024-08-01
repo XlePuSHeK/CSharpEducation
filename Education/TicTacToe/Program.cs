@@ -59,7 +59,7 @@ namespace TicTacToe
 			else if (Positions[4] == Positions[5] && Positions[5] == Positions[6])
 				return true;
 			//Winning Condition For Third Row
-			else if (Positions[6] == Positions[7] && Positions[7] == Positions[8])
+			else if (Positions[7] == Positions[8] && Positions[8] == Positions[9])
 				return true;
 			//Winning Condition For First Column
 			else if (Positions[1] == Positions[4] && Positions[4] == Positions[7])

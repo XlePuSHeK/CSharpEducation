@@ -4,111 +4,134 @@ namespace TicTacToe
 {
 	class Game
 	{
-		private static char[] Positions = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+		private static char[] positions = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
 		//By default player 1 is set
-		private static int Player = 1;
+		private static int player = 1;
 
-		private static int ChoicePosition;
+		private static int choicePosition;
 
-		private static bool? IsWon = null;
-		private static void Board()
+		private static bool? isWon = null;
+
+		/// <summary>
+		/// Отрисовать доску для игры.
+		/// </summary>
+		private static void DrawBoard()
 		{
 			Console.WriteLine("     |      |      ");
-			ChacngeColorPlate(1);
-			ChacngeColorPlate(2);
-			ChacngeColorPlate(3);
+			DrawPlate(1);
+			DrawPlate(2);
+			DrawPlate(3);
 			Console.WriteLine();
 			Console.WriteLine("_____|______|______ ");
 			Console.WriteLine("     |      |      ");
-			ChacngeColorPlate(4);
-			ChacngeColorPlate(5);
-			ChacngeColorPlate(6);
+			DrawPlate(4);
+			DrawPlate(5);
+			DrawPlate(6);
 			Console.WriteLine();
 			Console.WriteLine("_____|______|______ ");
 			Console.WriteLine("     |      |      ");
-			ChacngeColorPlate(7);
-			ChacngeColorPlate(8);
-			ChacngeColorPlate(9);
+			DrawPlate(7);
+			DrawPlate(8);
+			DrawPlate(9);
 			Console.WriteLine();
 			Console.WriteLine("     |      |      ");
 		}
-
-		private static void ChacngeColorPlate(int i)
+		/// <summary>
+		/// Отрисовать плитку на доске.
+		/// </summary>
+		/// <param name="position">Поизиция на поле.</param>
+		private static void DrawPlate(int position)
 		{
-			if (Positions[i] == 'X') Console.ForegroundColor = ConsoleColor.Red;
-			else if (Positions[i] == 'O') Console.ForegroundColor = ConsoleColor.Blue;
-			Console.Write("  {0} ", Positions[i]);
+			ColorPlate(position);
+			Console.Write("  {0} ", positions[position]);
 			Console.ResetColor();
 			Console.Write(" | ");
 		}
-		private static void CheckingChanceofThePlayer()
+
+		/// <summary>
+		/// Окрасить плитку в красный, если там крестик, если нолик в синий.
+		/// </summary>
+		/// <param name="position">Позиция на поле.</param>
+		private static void ColorPlate(int position)
 		{
-			if (Player % 2 == 0)
+			if (positions[position] == 'X') Console.ForegroundColor = ConsoleColor.Red;
+			else if (positions[position] == 'O') Console.ForegroundColor = ConsoleColor.Blue;
+		}
+
+		/// <summary>
+		/// Вывести в консоль какой игрок ходит.
+		/// </summary>
+		private static void WriteWhosePlayerMove()
+		{
+			if (player % 2 == 0)
 				Console.WriteLine("Player 2 Chance");
 			else
 				Console.WriteLine("Player 1 Chance");
 		}
-
+		/// <summary>
+		/// Проверить победные комбинации.
+		/// </summary>
+		/// <returns>Если нашлась победная комбинация - true, если ничья - false, иначе null.</returns>
 		private static bool? CheckWin()
 		{
 			//Winning Condition For First Row
-			if (Positions[1] == Positions[2] && Positions[2] == Positions[3])
+			if (positions[1] == positions[2] && positions[2] == positions[3])
 				return true;
 			//Winning Condition For Second Row
-			else if (Positions[4] == Positions[5] && Positions[5] == Positions[6])
+			else if (positions[4] == positions[5] && positions[5] == positions[6])
 				return true;
 			//Winning Condition For Third Row
-			else if (Positions[7] == Positions[8] && Positions[8] == Positions[9])
+			else if (positions[7] == positions[8] && positions[8] == positions[9])
 				return true;
 			//Winning Condition For First Column
-			else if (Positions[1] == Positions[4] && Positions[4] == Positions[7])
+			else if (positions[1] == positions[4] && positions[4] == positions[7])
 				return true;
 			//Winning Condition For Second Column
-			else if (Positions[2] == Positions[5] && Positions[5] == Positions[8])
+			else if (positions[2] == positions[5] && positions[5] == positions[8])
 				return true;
 			//Winning Condition For Third Column
-			else if (Positions[3] == Positions[6] && Positions[6] == Positions[9])
+			else if (positions[3] == positions[6] && positions[6] == positions[9])
 				return true;
-			else if (Positions[1] == Positions[5] && Positions[5] == Positions[9])
+			else if (positions[1] == positions[5] && positions[5] == positions[9])
 				return true;
-			else if (Positions[3] == Positions[5] && Positions[5] == Positions[7])
+			else if (positions[3] == positions[5] && positions[5] == positions[7])
 				return true;
 			// If all the cells or values filled with X or O then any player has won the match
-			else if (Positions[1] != '1' && Positions[2] != '2' && Positions[3] != '3' && Positions[4] != '4' &&
-							 Positions[5] != '5' && Positions[6] != '6' && Positions[7] != '7' && Positions[8] != '8' && Positions[9] != '9')
+			else if (positions[1] != '1' && positions[2] != '2' && positions[3] != '3' && positions[4] != '4' &&
+							 positions[5] != '5' && positions[6] != '6' && positions[7] != '7' && positions[8] != '8' && positions[9] != '9')
 				return false;
 			else
 				return null;
 		}
 
 		/// <summary>
-		/// Checking position of choice player 
+		/// Заполнить выбранную позицию крестиком или ноликом, при условии, что поле еще не заполнено, иначе выдать ошибку.
 		/// </summary>
-		private static void CheckingPositionOfChoice()
+		private static void FillSelectedPosition()
 		{
-			if (ChoicePosition > 0 && ChoicePosition < 10)
+			if (choicePosition > 0 && choicePosition < 10)
 			{
-				if (Positions[ChoicePosition] != 'X' && Positions[ChoicePosition] != 'O')
+				if (positions[choicePosition] != 'X' && positions[choicePosition] != 'O')
 				{
-					if (Player % 2 == 0) //if chance is of player 2 then mark O else mark X
-						Positions[ChoicePosition] = 'O';
+					if (player % 2 == 0)
+						positions[choicePosition] = 'O';
 					else
-						Positions[ChoicePosition] = 'X';
+						positions[choicePosition] = 'X';
 
-					Player++;
+					player++;
 				}
 				else
 				//If there is any possition where user want to run
 				//and that is already marked then show message and load board again
 				{
-					GetError(string.Format("Sorry the row {0} is already marked with {1}", ChoicePosition, Positions[ChoicePosition]));
+					GetError(string.Format("Sorry the row {0} is already marked with {1}", choicePosition, positions[choicePosition]));
 				}
-				IsWon = CheckWin();
+				isWon = CheckWin();
 			}
 			else
 			{
-				GetError(string.Format("Sorry the row {0} is not corrected", ChoicePosition));
+				GetError(string.Format("Sorry the row {0} is not corrected", choicePosition));
 			}
 
 		}
@@ -127,12 +150,15 @@ namespace TicTacToe
 			Console.ResetColor();
 		}
 
+		/// <summary>
+		/// Вывести в консоль, победившего игрока если нашлась победная комбинация, иначе вывести "Ничья".
+		/// </summary>
 		private static void WriteWhoPlayerHasWon()
 		{
-			if (IsWon.HasValue && IsWon.Value)
+			if (isWon.HasValue && isWon.Value)
 			{
 				Console.ForegroundColor = ConsoleColor.Green;
-				Console.WriteLine("Player {0} has won", (Player % 2) + 1);
+				Console.WriteLine("Player {0} has won", (player % 2) + 1);
 				Console.ResetColor();
 			}
 			else
@@ -146,14 +172,14 @@ namespace TicTacToe
 				Console.Clear();// whenever loop will be again start then screen will be clear
 				Console.WriteLine("Player1: X and Player2: O");
 				Console.WriteLine("\n");
-				CheckingChanceofThePlayer();
+				WriteWhosePlayerMove();
 				Console.WriteLine("\n");
-				Board();// calling the board Function
-				ChoicePosition = int.Parse(Console.ReadLine());//Taking users choice
-				CheckingPositionOfChoice();
-			} while (!IsWon.HasValue);
+				DrawBoard();// calling the board Function
+				choicePosition = int.Parse(Console.ReadLine());//Taking users choice
+				FillSelectedPosition();
+			} while (!isWon.HasValue);
 			Console.Clear();
-			Board();// getting filled board again
+			DrawBoard();// getting filled board again
 			WriteWhoPlayerHasWon();
 		}
 	}

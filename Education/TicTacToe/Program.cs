@@ -5,7 +5,6 @@ namespace TicTacToe
 	class Game
 	{
 		private static char[] positions = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-
 		//By default player 1 is set
 		private static int player = 1;
 
@@ -122,8 +121,6 @@ namespace TicTacToe
 					player++;
 				}
 				else
-				//If there is any possition where user want to run
-				//and that is already marked then show message and load board again
 				{
 					GetError(string.Format("Sorry the row {0} is already marked with {1}", choicePosition, positions[choicePosition]));
 				}
@@ -157,7 +154,7 @@ namespace TicTacToe
 		{
 			if (isWon.HasValue && isWon.Value)
 			{
-				Console.ForegroundColor = ConsoleColor.Green;
+			  Console.ForegroundColor = ConsoleColor.Green;
 				Console.WriteLine("Player {0} has won", (player % 2) + 1);
 				Console.ResetColor();
 			}
@@ -165,21 +162,23 @@ namespace TicTacToe
 				Console.WriteLine("Draw");
 			Console.ReadLine();
 		}
+
 		static void Main(string[] args)
 		{
 			do
 			{
-				Console.Clear();// whenever loop will be again start then screen will be clear
+				//Очищаем консоль, чтобы не мусорить.
+				Console.Clear();
 				Console.WriteLine("Player1: X and Player2: O");
 				Console.WriteLine("\n");
 				WriteWhosePlayerMove();
 				Console.WriteLine("\n");
-				DrawBoard();// calling the board Function
-				choicePosition = int.Parse(Console.ReadLine());//Taking users choice
+				DrawBoard();
+				choicePosition = int.Parse(Console.ReadLine());
 				FillSelectedPosition();
 			} while (!isWon.HasValue);
 			Console.Clear();
-			DrawBoard();// getting filled board again
+			DrawBoard();
 			WriteWhoPlayerHasWon();
 		}
 	}

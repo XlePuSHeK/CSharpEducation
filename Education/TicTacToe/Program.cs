@@ -2,7 +2,7 @@
 
 namespace TicTacToe
 {
-	class Game
+	public class Game
 	{
 		private static char[] positions = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 		//By default player 1 is set
@@ -163,7 +163,7 @@ namespace TicTacToe
 			Console.ReadLine();
 		}
 
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			do
 			{

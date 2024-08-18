@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task1", "Education\Task1.csproj", "{24BED534-AFF8-40FF-A1D4-8D8BA4969CCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task1", "Education\Task1.csproj", "{24BED534-AFF8-40FF-A1D4-8D8BA4969CCF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TicTacToe", "TicTacToe", "{0AD50166-C542-43DC-BB7A-81FA4D3B082C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe", "TicTacToe\TicTacToe.csproj", "{520A17D9-C059-45A0-8868-592D4318A1C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{24BED534-AFF8-40FF-A1D4-8D8BA4969CCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24BED534-AFF8-40FF-A1D4-8D8BA4969CCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24BED534-AFF8-40FF-A1D4-8D8BA4969CCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{520A17D9-C059-45A0-8868-592D4318A1C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{520A17D9-C059-45A0-8868-592D4318A1C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{520A17D9-C059-45A0-8868-592D4318A1C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{520A17D9-C059-45A0-8868-592D4318A1C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{520A17D9-C059-45A0-8868-592D4318A1C1} = {0AD50166-C542-43DC-BB7A-81FA4D3B082C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8EAFEC20-8656-489B-9425-4530D67C4E6F}
